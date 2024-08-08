@@ -1,0 +1,30 @@
+local invisiblePart = script.Parent
+local sound = workspace.Assets:FindFirstChild("Shop Theme")
+
+invisiblePart.Touched:Connect(function(hit)
+	local character = hit.Parent
+	local humanoid = character:FindFirstChild("Humanoid")
+
+	if humanoid then
+		print("touched")
+		local player = game.Players:GetPlayerFromCharacter(character)
+
+		if sound then
+			sound:Play()
+		end
+		player.PlayerGui.ShopGUI.Enabled = true
+	end
+end)
+
+invisiblePart.TouchEnded:Connect(function(hit)
+	local character = hit.Parent
+	local humanoid = character:FindFirstChild("Humanoid")
+
+	if humanoid then
+		print("no longer touching")
+		if sound then
+			sound:Stop()
+		end
+		game.Players:GetPlayerFromCharacter(character).PlayerGui.ShopGUI.Enabled = false
+	end
+end)
