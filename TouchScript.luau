@@ -8,11 +8,14 @@ invisiblePart.Touched:Connect(function(hit)
 	if humanoid then
 		print("touched")
 		local player = game.Players:GetPlayerFromCharacter(character)
-
+		local background: Sound = player:FindFirstChild("Elementals Lobby Theme")
 		if sound then
 			sound:Play()
 		end
-		local shop = game.Players:GetPlayerFromCharacter(character).PlayerGui.ShopGUI
+		if background then
+			background:Stop()
+		end
+		local shop = player.PlayerGui.ShopGUI
 		local counter = 1
 		while counter > 0 do
 			shop.Frame.BackgroundTransparency = counter
@@ -28,10 +31,16 @@ invisiblePart.TouchEnded:Connect(function(hit)
 
 	if humanoid then
 		print("no longer touching")
+		local player = game.Players:GetPlayerFromCharacter(character)
+		local background: Sound = player:FindFirstChild("Elementals Lobby Theme")
 		if sound then
 			sound:Stop()
+			-- can u also make it so that when u are in the shop the lobby stops
 		end
-		local shop = game.Players:GetPlayerFromCharacter(character).PlayerGui.ShopGUI
+		if background then
+			background:Play()
+		end
+		local shop = player.PlayerGui.ShopGUI
 		local counter = 0
 		while counter < 1 do
 			shop.Frame.BackgroundTransparency = counter
